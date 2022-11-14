@@ -24,7 +24,7 @@ const networkVersion = 'mumbai' // 'v1'
 // const MainNetworkDetails = Object.freeze(network.Main) // all info related to Main
 // const MaticNetworkDetails = Object.freeze(network.Matic)  // all info related to Matic
 
-const tokenAddress = '0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1' // can get from polygon faucet
+const tokenAddress = '0xfe4F5145f6e09952a5ba9e956ED0C25e3Fa4c7F1' // 测试网代币名称DERC20 可以在polygon水龙头免费获取
 const toAddress = '0x2254E4D1B41F2Dd3969a79b994E6ee8C3C6F2C71'
 const tokenDecimals = 18
 
@@ -81,6 +81,7 @@ function App() {
 
   const amount = 0.1
 
+  //转账token
   const transferTokenHandler = async () => {
     const { ethereum } = window;
 
@@ -96,13 +97,13 @@ function App() {
       const erc20Token = posClient.erc20(tokenAddress);
 
       const result = await erc20Token.transfer(unparsedToAmount, toAddress);
-      console.log(erc20Token);
+      console.log('erc20Token---',erc20Token);
 
       const txHash = await result.getTransactionHash();
       setTxHash(txHash)
 
       const txReceipt = await result.getReceipt();
-      console.log('txReceipt:', txReceipt);
+      console.log('txReceipt---', txReceipt);
 
     } catch (err) {
       console.log(err)
@@ -238,7 +239,6 @@ function App() {
       } catch (e) {
         // todo: understand why try catch is required here
       }
-
       // get token balance
       (async () => {
         const { ethereum } = window;
